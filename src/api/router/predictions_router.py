@@ -1,7 +1,7 @@
-from typing import List
+from typing import Annotated
 
 import rootutils
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Body, Depends, Request
 
 from src.api.core.bilstm_core import BilstmCore
 from src.api.schema.api_schema import PredictionResponseSchema, PredictionsRequestSchema
@@ -37,11 +37,14 @@ router = APIRouter(
     response_model=PredictionResponseSchema,
 )
 async def bilstm_predictions(
-    request: PredictionsRequestSchema = Depends(),
+    data: Annotated[PredictionsRequestSchema, Body(embed=True)],
 ) -> PredictionResponseSchema:
     """BiLSTM predictions endpoint."""
 
-    cleaned_text = await clean_text(request.text)
+    log.info(f"Processing text: {data.text}")
+    log.info(f"Processing data: {data}")
+
+    cleaned_text = await clean_text(data.text)
 
     predictions = bilstm_core.predict(cleaned_text)
 

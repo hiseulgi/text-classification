@@ -3,7 +3,7 @@ from typing import List
 import rootutils
 from pydantic import BaseModel, Field
 
-from src.api.schema.predictions_schema import PredictionsResultSchema
+from src.web.schema.predictions_schema import PredictionsResultSchema
 
 ROOT = rootutils.setup_root(
     search_from=__file__,
@@ -18,17 +18,6 @@ class BaseApiResponseSchema(BaseModel):
 
     status: str = Field(..., description="API Response Status", example="success")
     message: str = Field(..., description="API Response Message", example="OK")
-
-
-class PredictionsRequestSchema(BaseModel):
-    """Predictions Request Schema"""
-
-    text: str = Field(
-        ...,
-        description="Input text to be classified",
-        example="The USA president was born in Indonesia.",
-    )
-    model_name: str = Field(..., description="Metadata Model Name", example="bilstm")
 
 
 class PredictionResponseSchema(BaseApiResponseSchema):
