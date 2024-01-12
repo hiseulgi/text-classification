@@ -2,7 +2,7 @@
 
 ![Web App Interface](asset/01_web_app_interface.png)
 
-Text classification of news articles using a pre-trained model(bidirectional LSTM) and Streamlit web app.
+Text classification of news articles using a pre-trained model (bidirectional LSTM) and Streamlit web app.
 
 ## Dataset
 
