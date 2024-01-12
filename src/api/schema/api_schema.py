@@ -23,7 +23,12 @@ class BaseApiResponseSchema(BaseModel):
 class PredictionsRequestSchema(BaseModel):
     """Predictions Request Schema"""
 
-    text: str = Field(..., description="Input text to be classified")
+    text: str = Field(
+        ...,
+        description="Input text to be classified",
+        example="The USA president was born in Indonesia.",
+    )
+    model_name: str = Field(..., description="Metadata Model Name", example="bilstm")
 
 
 class PredictionResponseSchema(BaseApiResponseSchema):
